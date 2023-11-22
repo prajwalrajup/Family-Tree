@@ -1,21 +1,18 @@
 "use client";
 
 import Dagre from "@dagrejs/dagre";
-import React, { useCallback, useEffect } from "react";
+import React, { useCallback } from "react";
+import "reactflow/dist/style.css";
+import MarriedNode from "./MarriedNode";
+import { preProcessData } from "./PreProcessData";
 import ReactFlow, {
   MiniMap,
   Controls,
   ReactFlowProvider,
-  Panel,
   useNodesState,
   useEdgesState,
   useReactFlow,
 } from "reactflow";
-
-import "reactflow/dist/style.css";
-import MarriedNode from "./MarriedNode";
-
-import { preProcessData } from "./PreProcessData";
 
 const g = new Dagre.graphlib.Graph().setDefaultEdgeLabel(() => ({}));
 
@@ -24,9 +21,8 @@ const nodeTypes = {
 };
 
 const LayoutFlow = ({ data }) => {
-  const { initialNodes, initialEdges } = preProcessData(data);
-
   const { fitView } = useReactFlow();
+  const { initialNodes, initialEdges } = preProcessData(data);
   const [nodes, setNodes, onNodesChange] = useNodesState(initialNodes);
   const [edges, setEdges, onEdgesChange] = useEdgesState(initialEdges);
 
@@ -61,9 +57,6 @@ const LayoutFlow = ({ data }) => {
     >
       <Controls />
       <MiniMap />
-      {/* <Panel position="top-right">
-        <button onClick={() => onLayout()}>vertical layout</button>
-      </Panel> */}
     </ReactFlow>
   );
 };

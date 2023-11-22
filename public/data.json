@@ -1,0 +1,77 @@
+{
+    "name": "Family Tree",
+    "people": {
+        "1": {
+            "name": "John Doe",
+            "gender": "MALE",
+            "spouse": "2",
+            "children": [
+                "3",
+                "4"
+            ],
+            "sourcePosition": "right"
+        },
+        "2": {
+            "name": "Wife human",
+            "gender": "FEMALE",
+            "spouse": "1",
+            "children": [
+                "3",
+                "4"
+            ],
+            "sourcePosition": "left"
+        },
+        "3": {
+            "name": "Alice Doe",
+            "gender": "FEMALE",
+            "parents": [
+                "1",
+                "2"
+            ],
+            "spouse": "5",
+            "children": [
+                "6",
+                "7"
+            ]
+        },
+        "4": {
+            "name": "Bob Doe",
+            "gender": "MALE",
+            "parents": [
+                "1",
+                "2"
+            ],
+            "spouse": null,
+            "children": []
+        },
+        "5": {
+            "name": "Charlie Smith",
+            "gender": "MALE",
+            "spouse": "3",
+            "children": [
+                "6",
+                "7"
+            ]
+        },
+        "6": {
+            "name": "Eva Smith",
+            "gender": "FEMALE",
+            "parents": [
+                "3",
+                "5"
+            ],
+            "spouse": null,
+            "children": []
+        },
+        "7": {
+            "name": "Frank Smith",
+            "gender": "MALE",
+            "parents": [
+                "3",
+                "5"
+            ],
+            "spouse": null,
+            "children": []
+        }
+    }
+}

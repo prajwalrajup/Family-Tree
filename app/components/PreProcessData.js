@@ -1,4 +1,3 @@
-
 class Gender {
   static MALE = "MALE";
   static FEMALE = "FEMALE";
@@ -9,9 +8,10 @@ export function preProcessData(data) {
   const initialEdges = [];
   const deletedNodes = new Set();
 
-  for (const person of Object.values(data.people)) {
+  for (const personIndex in data.people) {
+    const person = data.people[personIndex];
     // Skip the preson if married and already node is created
-    if (deletedNodes.has(person.id)) {
+    if (deletedNodes.has(personIndex)) {
       continue;
     }
 
@@ -20,6 +20,7 @@ export function preProcessData(data) {
       person.data = {
         label: person.name,
       };
+      person.id = personIndex;
       initialNodes.push(person);
       continue;
     }
@@ -30,8 +31,8 @@ export function preProcessData(data) {
 
     const personId =
       person.gender == Gender.MALE
-        ? `${person.id}-${spouse.id}`
-        : `${spouse.id}-${person.id}`;
+        ? `${personIndex}-${person.spouse}`
+        : `${person.spouse}-${personIndex}`;
 
     const marriedNode = {
       id: personId,
@@ -59,9 +60,9 @@ export function preProcessData(data) {
 
       const childId =
         child.gender == Gender.MALE
-          ? `${child.id}-${child.spouse}`
-          : `${child.spouse}-${child.id}`;
-      
+          ? `${childIndex}-${child.spouse}`
+          : `${child.spouse}-${childIndex}`;
+
       // If the child is married point it to marriedNode of child
       if (child.spouse) {
         const edge = {
@@ -77,9 +78,9 @@ export function preProcessData(data) {
       }
 
       const edge = {
-        id: `e-${personId}-${child.id}`,
+        id: `e-${personId}-${childIndex}`,
         source: personId,
-        target: child.id,
+        target: childIndex,
         animated: true,
         type: "smoothstep",
       };
