@@ -3,8 +3,6 @@ import { Handle, Position } from "reactflow";
 import styles from "./MarriedNode.module.css";
 
 export default memo(({ data, isConnectable }) => {
-  console.log(data)
-  console.log(data.MALE.name)
   return (
     <div>
       <Handle

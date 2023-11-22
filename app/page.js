@@ -26,7 +26,7 @@ const familyData = {
       name: "Alice Doe",
       gender: "FEMALE",
       parents: ["1", "2"],
-      spouse: null,
+      spouse: "5",
       children: ["6", "7"],
      
     },
@@ -38,29 +38,29 @@ const familyData = {
       spouse: null,
       children: [],
     },
-    // {
-    //   id: "5",
-    //   name: "Charlie Smith",
-    //   gender: "MALE",
-    //   spouse: "3",
-    //   children: ["6", "7"],
-    // },
-    // {
-    //   id: "6",
-    //   name: "Eva Smith",
-    //   gender: "FEMALE",
-    //   parents: ["3", "5"],
-    //   spouse: null,
-    //   children: [],
-    // },
-    // {
-    //   id: "7",
-    //   name: "Frank Smith",
-    //   gender: "MALE",
-    //   parents: ["3", "5"],
-    //   spouse: null,
-    //   children: [],
-    // },
+    "5":{
+      id: "5",
+      name: "Charlie Smith",
+      gender: "MALE",
+      spouse: "3",
+      children: ["6", "7"],
+    },
+    "6":{
+      id: "6",
+      name: "Eva Smith",
+      gender: "FEMALE",
+      parents: ["3", "5"],
+      spouse: null,
+      children: [],
+    },
+    "7":{
+      id: "7",
+      name: "Frank Smith",
+      gender: "MALE",
+      parents: ["3", "5"],
+      spouse: null,
+      children: [],
+    },
   },
 };
 
@@ -68,7 +68,7 @@ export default function Home() {
   return (
     <main className={styles.main}>
       <div className={styles.description}>
-        {/* <h1>Family Tree</h1> */}
+        <h1>Family Tree</h1>
         {/* <FamilyTree data={familyData} /> */}
         <Layout data={familyData} />
       </div>
