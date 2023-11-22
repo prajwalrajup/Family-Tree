@@ -13,58 +13,18 @@ import ReactFlow, {
 } from "reactflow";
 
 import "reactflow/dist/style.css";
+import MarriedNode from "./MarriedNode";
+
+import { preProcessData } from "./PreProcessData";
 
 const g = new Dagre.graphlib.Graph().setDefaultEdgeLabel(() => ({}));
 
-class Gender {
-  static MALE = "MALE";
-  static FEMALE = "FEMALE";
-}
-// const initialNodes = [
-//   {
-//     id: "1",
-//     name: "John Doe",
-//     children: ["2a", "2b"],
-//     gender: "MALE",
-//   },
-//   {
-//     id: "1b",
-//     name: "wife",
-//     children: ["2a", "2b"],
-//     gender: "FEMALE",
-//   },
-//   {
-//     id: "2a",
-//     name: "dary",
-//     children: [],
-//   },
-//   {
-//     id: "2b",
-//     name: "honey",
-//     children: ["3"],
-//   },
-// ];
+const nodeTypes = {
+  marriedNode: MarriedNode,
+};
 
 const LayoutFlow = ({ data }) => {
-  const initialEdges = [];
-  const initialNodes = Object.values(data.people);
-
-  initialNodes.forEach((node) => {
-    if (node.children) {
-      node.children.forEach((child) => {
-        initialEdges.push({
-          id: `e-${node.id}-${child}`,
-          source: node.id,
-          target: child,
-          animated: true,
-          type: "smoothstep",
-        });
-      });
-    }
-    node["data"] = { label: node.name };
-  });
-
-  console.log(initialNodes);
+  const { initialNodes, initialEdges } = preProcessData(data);
 
   const { fitView } = useReactFlow();
   const [nodes, setNodes, onNodesChange] = useNodesState(initialNodes);
@@ -84,12 +44,19 @@ const LayoutFlow = ({ data }) => {
     fitView();
   });
 
+  const onConnect = useCallback(
+    (params) => setEdges((eds) => addEdge(params, eds)),
+    [setEdges]
+  );
+
   return (
     <ReactFlow
       nodes={nodes}
       edges={edges}
       onNodesChange={onNodesChange}
       onEdgesChange={onEdgesChange}
+      nodeTypes={nodeTypes}
+      onConnect={onConnect}
       fitView
     >
       <Controls />

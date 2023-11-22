@@ -5,36 +5,39 @@ import Layout from "./components/Layout";
 
 const familyData = {
   people: {
-    1: {
+    "1": {
       id: "1",
       name: "John Doe",
       gender: "MALE",
       spouse: "2",
       children: ["3", "4"],
+      sourcePosition: "right",
     },
-    2: {
+    "2": {
       id: "2",
-      name: "Jane Doe",
+      name: "Wife human",
       gender: "FEMALE",
       spouse: "1",
       children: ["3", "4"],
+      sourcePosition: "left",
     },
-    3: {
+    "3": {
       id: "3",
       name: "Alice Doe",
       gender: "FEMALE",
       parents: ["1", "2"],
-      spouse: "5",
+      spouse: null,
       children: ["6", "7"],
+     
     },
-    // {
-    //   id: "4",
-    //   name: "Bob Doe",
-    //   gender: "MALE",
-    //   parents: ["1", "2"],
-    //   spouse: null,
-    //   children: [],
-    // },
+    "4":{
+      id: "4",
+      name: "Bob Doe",
+      gender: "MALE",
+      parents: ["1", "2"],
+      spouse: null,
+      children: [],
+    },
     // {
     //   id: "5",
     //   name: "Charlie Smith",
@@ -65,7 +68,7 @@ export default function Home() {
   return (
     <main className={styles.main}>
       <div className={styles.description}>
-        <h1>Family Tree</h1>
+        {/* <h1>Family Tree</h1> */}
         {/* <FamilyTree data={familyData} /> */}
         <Layout data={familyData} />
       </div>
